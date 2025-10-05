@@ -22,11 +22,15 @@ public class Pizza {
 
     private double prezzo;
 
-    public Pizza(String nome, String descizione,String fotoUrl, double prezzo){
+    public Pizza(String nome, String descrizione,String fotoUrl, double prezzo){
         this.nome=nome;
         this.descrizione=descrizione;
         this.fotoUrl=fotoUrl;
         this.prezzo=prezzo;
+    }
+
+    public Pizza(){
+
     }
 
    
