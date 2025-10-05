@@ -6,13 +6,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Pizza;
 import com.example.demo.repository.PizzaRepository;
+
 
 
 
@@ -48,6 +52,27 @@ public class PizzaController{
         }
         return "fragments/show";
     }
+
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("pizza", new Pizza());
+
+        return "fragments/create";
+    }
+
+    @PostMapping("/create")
+    public String save(@ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "fragments/create";
+        }else{
+            repository.save(formPizza);
+             return "redirect:/pizza";
+        }
+
+     
+    }
+    
+    
     
     
 
