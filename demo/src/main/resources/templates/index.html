@@ -11,6 +11,12 @@
    <div th:replace="~{fragments/navbar :: navbar}"></div>
     
     <div class="container mt-5">
+        <th:block th:if="${successMessage != null}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span th:text="${successMessage}"></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </th:block>
         <!-- lista pizze vuota -->
         <div th:if="${pizze.isEmpty()}">
             <div class="alert alert-warning text-center">

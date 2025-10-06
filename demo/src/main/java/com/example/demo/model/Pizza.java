@@ -18,13 +18,13 @@ public class Pizza {
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message="nome deve essere inserito")
-    @NotBlank
+    @NotNull
+    @NotBlank(message="nome deve essere inserito")
     @Size(min=5, max=20, message="il nome deve essere tra 5 e 20 caratteri")
     private String nome;
 
-    @NotNull(message="la descrizione non può essere vuota")
-    @NotBlank
+    @NotNull
+    @NotBlank(message="la descrizione non può essere vuota")
     private String descrizione;
     
 
