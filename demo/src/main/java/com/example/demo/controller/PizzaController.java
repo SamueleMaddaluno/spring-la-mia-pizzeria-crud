@@ -24,6 +24,8 @@ import jakarta.validation.Valid;
 
 
 
+
+
 @Controller
 @RequestMapping("/pizza")
 public class PizzaController{
@@ -75,6 +77,39 @@ public class PizzaController{
 
      
     }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable ("id") Integer id, Model model) {
+        Optional<Pizza> optPizza =repository.findById(id);
+        Pizza pizza=optPizza.get();
+        model.addAttribute("pizza", pizza);
+
+        return  "fragments/edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@Valid @ModelAttribute("pizza") Pizza pizzaForm, BindingResult bindingResult, Model model) {
+        
+        if(bindingResult.hasErrors()){
+            return "fragments/edit";
+        }
+
+        repository.save(pizzaForm);
+
+        return "redirect:/pizza";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id) {
+
+        repository.deleteById(id);
+        
+        
+        return "redirect:/pizza";
+    }
+    
+    
+    
     
     
     

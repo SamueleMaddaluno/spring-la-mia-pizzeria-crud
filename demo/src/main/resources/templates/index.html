@@ -45,17 +45,38 @@
                     </div>
                 </div>
                 </div>
-            
-                <div class="list-group" th:each="pizza : ${pizze}">
-                    <a th:href="@{|pizza/show/${pizza.id}|}" class="list-group-item list-group-item-action text-center mb-2" th:text="${pizza.nome}"></a>
-                </div>
-            </div>
-         </div>
-        
-    </div>
-
-
-
+                
+                    <table class="table table-striped ">
+                        <thead>
+                            <tr>
+                            <th scope="col">Pizze</th>
+                            <!-- per la modifica -->
+                            <th></th>  
+                            <!-- per cancellare -->
+                            <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="pizza : ${pizze}">
+                                <!-- colonna pizza -->
+                            <td>
+                                <a th:href="@{|pizza/show/${pizza.id}|}" class="list-group-item list-group-item-action " th:text="${pizza.nome}"></a>
+                            </td>
+                            <!-- colonna per modificare -->
+                            <td>
+                               <a th:href="@{|pizza/edit/${pizza.id}|}" class="btn btn-dark">modifica pizza</a>
+                            </td>
+                            <!-- colonna per cancellare -->
+                            <td>
+                               <form th:action="@{/pizza/delete/{id}(id=${pizza.id})}" method="post">
+                                    <button class="btn btn-danger" type="submit" id="submitButton">
+                                        <i class="fas fa-trash-alt">elimina pizza</i>
+                                    </button>
+                               </form>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
