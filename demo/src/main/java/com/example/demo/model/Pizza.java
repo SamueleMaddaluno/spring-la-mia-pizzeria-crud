@@ -1,9 +1,12 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -17,6 +20,10 @@ public class Pizza {
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
     private Integer id;
+
+    @OneToMany(mappedBy="pizza")
+    private List<OffertaSpeciale> offerte;
+
 
     @NotNull
     @NotBlank(message="nome deve essere inserito")
@@ -88,10 +95,16 @@ public class Pizza {
     }
 
 
-
-
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<OffertaSpeciale> getOfferte() {
+        return offerte;
+    }
+
+    public void setOfferte(List<OffertaSpeciale> offerte) {
+        this.offerte = offerte;
     }
 
     

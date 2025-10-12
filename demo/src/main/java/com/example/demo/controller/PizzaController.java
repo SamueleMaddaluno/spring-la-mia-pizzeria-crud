@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.model.OffertaSpeciale;
 import com.example.demo.model.Pizza;
 import com.example.demo.repository.PizzaRepository;
 
@@ -106,6 +107,19 @@ public class PizzaController{
         
         
         return "redirect:/pizza";
+    }
+    
+    @GetMapping("/{id}/offerte")
+    public String offerte(@PathVariable("id") Integer id, Model model) {
+        OffertaSpeciale offertaSpeciale =new OffertaSpeciale();
+
+        offertaSpeciale.setPizza(repository.findById(id).get());
+
+        model.addAttribute("offertaSpeciale", offertaSpeciale);
+        
+        // creazione nuova offerta
+        model.addAttribute("editMode",false);
+        return "/offerte/edit";
     }
     
     
