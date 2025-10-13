@@ -7,59 +7,72 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <div th:replace="~{fragments/navbar :: navbar('Pizza')}"></div>
     <div class="container" th:object="${pizza}" th:unless="${empty}">
-        <h1 th:text="*{nome}"></h1>
-        <hr/>
-        <img class="m-auto w-25" th:src="@{${pizza.fotoUrl}}" alt="foto pizza">
         <div class="row">
-            <div class="col-6 mt-4">
-                <dl>
-                    <dt class="fs-4">ingredienti pizza</dt>
-                    <dd class="fs-5" th:text="*{descrizione}"></dd>
-                    <dt class="fs-4">il prezzo della pizza è di</dt>
-                    <dd class="fs-5" th:text="|*{prezzo} €|"></dd>
-                </dl>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <h3>OFFERTE SPECIALI</h3>
-                <a class="btn btn-primary" th:href="@{/pizza/{id}/offerte(id=${pizza.id})}">+offerta</a>
-                <table class="table table-striped" th:if="${pizza.offerte.size() > 0}">
-                    <thead>
-                        <tr>
-                            <td>datainizio</td>
-                            <td>datafine</td>
-                            <td>titolo</td>
-                            <!-- per la modifica -->
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="offerta : ${pizza.offerte}">
-                            <td th:text="${offerta.dataInizio}"></td>
-                            <td th:text="${offerta.dataFine}"></td>
-                            <td th:text="${offerta.titolo}"></td>
-                            <td>
-                                <a class="btn btn-primary" th:href="@{/offerte/edit/{id}(id=${offerta.id})}">penna edit</a>
-                            </td>
-                        </tr>
-
-                    </tbody>
-
-
-                </table>
-                <div th:unless="${pizza.offerte.size() > 0}">
-                    <div class="alert">
-                        Non ci sono offerte speciali
+             <div class="col-8" >
+                <h1 th:text="*{nome}"></h1>
+                <hr/>
+                <img class="m-auto w-25" th:src="@{${pizza.fotoUrl}}" alt="foto pizza">
+                <div class="row">
+                    <div class="col-6 mt-4">
+                        <dl>
+                            <dt class="fs-4">ingredienti pizza</dt>
+                            <dd class="fs-5" th:text="*{descrizione}"></dd>
+                            <dt class="fs-4">il prezzo della pizza è di</dt>
+                            <dd class="fs-5" th:text="|*{prezzo} €|"></dd>
+                        </dl>
                     </div>
                 </div>
+                    <div class="col-4">
+                        <h3>Ingredienti</h3>
+                        <ul>
+                            <li th:each="ingrediente : ${ingredienti}" th:text="${ingrediente.ingrediente}"></li>
+                        </ul>
+                    </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h3>OFFERTE SPECIALI</h3>
+                        <a class="btn btn-primary" th:href="@{/pizza/{id}/offerte(id=${pizza.id})}">+offerta</a>
+                        <table class="table table-striped" th:if="${pizza.offerte.size() > 0}">
+                            <thead>
+                                <tr>
+                                    <td>datainizio</td>
+                                    <td>datafine</td>
+                                    <td>titolo</td>
+                                    <!-- per la modifica -->
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="offerta : ${pizza.offerte}">
+                                    <td th:text="${offerta.dataInizio}"></td>
+                                    <td th:text="${offerta.dataFine}"></td>
+                                    <td th:text="${offerta.titolo}"></td>
+                                    <td>
+                                        <a class="btn btn-primary" th:href="@{/offerte/edit/{id}(id=${offerta.id})}">penna edit</a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+
+                        </table>
+                        <div th:unless="${pizza.offerte.size() > 0}">
+                            <div class="alert">
+                                Non ci sono offerte speciali
+                            </div>
+                        </div>
+
+                </div>
+            </div>
 
             </div>
+           
         </div>
-
+       
     </div>
+    
     <div th:if="${empty}">
         <h1>Prodotto non disponibile</h1>
     </div>

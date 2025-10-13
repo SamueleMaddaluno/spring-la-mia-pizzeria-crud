@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-    <nav th:fragment="navbar">
+    <nav class="navbar bg-danger navbar-expand-lg  " th:fragment="navbar(current)">
         <div class="container-fluid p-0">
-            <nav class="navbar bg-danger navbar-expand-lg  ">
-                <div class="container-fluid">
-                <a class="navbar-brand text-light" th:href="@{/pizza}">Pizzeria</a>
-                </div>
-            </nav>
+            <a th:href="@{/pizza}">Pizzeria</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                   <li class="nav-item">
+                      <a class="nav-link" aria-current="page" th:href="@{/pizza}"
+                         th:classAppend="${current == 'Pizza'} ? 'active' : 'not-active'">Pizze</a>
+                    </li>
+                     <li class="nav-item">
+                       <a class="nav-link" aria-current="page" th:href="@{/ingredienti}"
+                                th:classAppend="${current == 'Ingredienti'} ? 'active' : 'not-active'">Ingredienti</a>
+                    </li>
+                </ul>
         </div>
     </nav>
 </body>
@@ -69,3 +78,13 @@ La pagina di dettaglio della singola pizza mostrerà l’elenco delle offerte co
  e avrà un bottone “Crea nuova offerta speciale” per aggiungerne una nuova.
 Accanto ad ogni offerta speciale è previsto un bottone che mi porterà a una pagina per modificarla.
 Buon lavoro!!  -->
+
+
+
+
+<!-- Ciao ragazzi,
+nuovo pezzettino per la nostra pizzeria : gli ingredienti!
+Ogni pizza può avere più ingredienti, e ogni ingrediente può essere collegato a più pizze.
+Prevediamo quindi una pagina per mostrare l’elenco di tutti gli ingredienti che utilizziamo nella nostra pizzeria
+ che permetta anche di crearne di nuovi (e di cancellarli).
+Nella pagina di creazione (e modifica) della singola pizza dobbiamo dare la possibilità di collegare uno o più ingredienti. -->
